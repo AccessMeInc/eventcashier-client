@@ -43,7 +43,16 @@ class App extends Component {
     };
     }
 
-
+    componentDidMount() {
+        console.log("Component did mount. Backend URL:", this.state.backendURL);
+        if (!this.state.backendURL) {
+            console.error("No Backend URL provided. Check your environment variables.");
+        } else {
+            this.initializeBackendClientAndTerminal(this.state.backendURL).catch(e => {
+                console.error("Failed to initialize backend client:", e);
+            });
+        }
+    }
 
   isWorkflowDisabled = () =>
     this.state.cancelablePayment || this.state.workFlowInProgress;
@@ -62,11 +71,7 @@ class App extends Component {
     }
     };
 
-    componentDidMount() {
-        if (this.state.backendURL) {
-            this.initializeBackendClientAndTerminal(this.state.backendURL);
-        }
-    }
+
 
   // 1. Stripe Terminal Initialization
   initializeBackendClientAndTerminal(url) {
