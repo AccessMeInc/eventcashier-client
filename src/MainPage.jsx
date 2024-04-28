@@ -483,19 +483,6 @@ class App extends Component {
             cancelablePayment={cancelablePayment}
             usingSimulator={usingSimulator}
           />
-          <RefundForm
-            onClickProcessRefund={() =>
-              this.runWorkflow("collectRefund", this.collectRefundPaymentMethod)
-            }
-            chargeID={this.state.refundedChargeID}
-            onChangeChargeID={id => this.updateRefundChargeID(id)}
-            refundAmount={this.state.refundedAmount}
-            onChangeRefundAmount={amt => this.updateRefundAmount(amt)}
-            cancelableRefund={this.state.cancelableRefund}
-            onClickCancelRefund={() =>
-              this.runWorkflow("cancelRefund", this.cancelPendingRefund)
-            }
-          />
         </>
       );
     }
