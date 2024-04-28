@@ -11,7 +11,6 @@ import ConnectionInfo from "./ConnectionInfo/ConnectionInfo.jsx";
 import Readers from "./Forms/Readers.jsx";
 import Group from "./components/Group/Group.jsx";
 import Logs from "./Logs/Logs.jsx";
-import PaymentForm from './Forms/PaymentForm';
 
 import { css } from "emotion";
 
@@ -512,17 +511,7 @@ class App extends Component {
             onChangeItemDescription={description =>
               this.updateItemDescription(description)
             }
-              />
-              <PaymentForm
-                  onPaymentSuccess={(intent) => {
-                      console.log('Payment successful:', intent);
-                      // Additional logic upon successful payment
-                  }}
-                  onPaymentCancel={() => {
-                      console.log('Payment canceled');
-                      // Additional logic upon payment cancellation
-                  }}
-              />
+          />
         </>
       );
     }
