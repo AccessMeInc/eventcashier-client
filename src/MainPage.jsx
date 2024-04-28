@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.state = {
       status: "requires_initializing", // requires_connecting || reader_registration || workflows
-      backendURL: null,
+      backendURL: props.backendUrl,  // Initialize from props
       discoveredReaders: [],
       connectionStatus: "not_connected",
       reader: null,
@@ -41,7 +41,9 @@ class App extends Component {
       tipAmount: null,
       simulateOnReaderTip: false
     };
-  }
+    }
+
+
 
   isWorkflowDisabled = () =>
     this.state.cancelablePayment || this.state.workFlowInProgress;
@@ -58,7 +60,13 @@ class App extends Component {
         workFlowInProgress: null
       });
     }
-  };
+    };
+
+    componentDidMount() {
+        if (this.state.backendURL) {
+            this.initializeBackendClientAndTerminal(this.state.backendURL);
+        }
+    }
 
   // 1. Stripe Terminal Initialization
   initializeBackendClientAndTerminal(url) {
