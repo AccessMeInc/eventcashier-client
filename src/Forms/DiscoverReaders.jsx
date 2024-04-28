@@ -176,14 +176,6 @@ class DiscoverReaders extends React.Component {
                 Register reader
               </Text>
             </Button>
-            <Button
-              onClick={this.onClickUseSimulator}
-              disabled={requestInProgress}
-            >
-              <Text size={14} color="dark">
-                Use simulator{" "}
-              </Text>
-            </Button>
           </Group>
         </Section>
       </Group>
