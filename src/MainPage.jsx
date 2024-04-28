@@ -496,22 +496,6 @@ class App extends Component {
               this.runWorkflow("cancelRefund", this.cancelPendingRefund)
             }
           />
-          <CartForm
-            workFlowDisabled={this.isWorkflowDisabled()}
-            onClickUpdateLineItems={() =>
-              this.runWorkflow("updateLineItems", this.updateLineItems)
-            }
-            itemDescription={this.state.itemDescription}
-            chargeAmount={this.state.chargeAmount}
-            taxAmount={this.state.taxAmount}
-            currency={this.state.currency}
-            onChangeCurrency={currency => this.updateCurrency(currency)}
-            onChangeChargeAmount={amount => this.updateChargeAmount(amount)}
-            onChangeTaxAmount={amount => this.updateTaxAmount(amount)}
-            onChangeItemDescription={description =>
-              this.updateItemDescription(description)
-            }
-          />
         </>
       );
     }
