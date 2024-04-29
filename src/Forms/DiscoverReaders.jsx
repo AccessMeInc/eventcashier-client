@@ -176,10 +176,7 @@ class DiscoverReaders extends React.Component {
                 Register reader
               </Text>
             </Button>
-            <Button
-              onClick={this.onClickUseSimulator}
-              disabled={requestInProgress}
-            >
+
           </Group>
         </Section>
       </Group>
