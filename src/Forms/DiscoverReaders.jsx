@@ -109,9 +109,7 @@ class DiscoverReaders extends React.Component {
             <ReaderIcon />
 
             <Text color="darkGrey" size={12}>
-              Register a new reader, then discover readers on your account. You
-              can also use the reader simulator provided by the SDK if you don't
-              have hardware.
+              Register a new reader, then discover readers on your account.
             </Text>
           </Group>
         </Section>
@@ -173,7 +171,7 @@ class DiscoverReaders extends React.Component {
             spacing={8}
           >
 
-                        <Button onClick={onTriggerDiscoverReaders} disabled={requestInProgress}>
+                        <Button onClick={this.onTriggerDiscoverReaders} disabled={requestInProgress}>
               <Text size={14} color="dark">
                 Discover readers
               </Text>
