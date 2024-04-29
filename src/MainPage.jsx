@@ -5,8 +5,6 @@ import Logger from "./logger";
 
 import BackendURLForm from "./Forms/BackendURLForm.jsx";
 import CommonWorkflows from "./Forms/CommonWorkflows.jsx";
-import RefundForm from "./Forms/RefundForm.jsx";
-import CartForm from "./Forms/CartForm.jsx";
 import ConnectionInfo from "./ConnectionInfo/ConnectionInfo.jsx";
 import Readers from "./Forms/Readers.jsx";
 import Group from "./components/Group/Group.jsx";
@@ -19,7 +17,7 @@ class App extends Component {
     super(props);
     this.state = {
       status: "requires_initializing", // requires_connecting || reader_registration || workflows
-      backendURL: props.backendUrl,  // Initialize from props
+      backendURL: null,
       discoveredReaders: [],
       connectionStatus: "not_connected",
       reader: null,
@@ -41,18 +39,7 @@ class App extends Component {
       tipAmount: null,
       simulateOnReaderTip: false
     };
-    }
-
-    componentDidMount() {
-        console.log("Component did mount. Backend URL:", this.state.backendURL);
-        if (!this.state.backendURL) {
-            console.error("No Backend URL provided. Check your environment variables.");
-        } else {
-            this.initializeBackendClientAndTerminal(this.state.backendURL).catch(e => {
-                console.error("Failed to initialize backend client:", e);
-            });
-        }
-    }
+  }
 
   isWorkflowDisabled = () =>
     this.state.cancelablePayment || this.state.workFlowInProgress;
@@ -69,9 +56,7 @@ class App extends Component {
         workFlowInProgress: null
       });
     }
-    };
-
-
+  };
 
   // 1. Stripe Terminal Initialization
   initializeBackendClientAndTerminal(url) {
