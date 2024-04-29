@@ -155,10 +155,11 @@ class DiscoverReaders extends React.Component {
             ) : (
               <Button
                 color="text"
-                onClick={this.onTriggerDiscoverReaders}
+                               // onClick={this.onTriggerDiscoverReaders}
+                                onClick={this.onClickRegister}
                 disabled={requestInProgress}
               >
-                Discover
+                Register reader
               </Button>
             )}
           </Group>
@@ -171,9 +172,10 @@ class DiscoverReaders extends React.Component {
             alignment={{ justifyContent: "center" }}
             spacing={8}
           >
-            <Button onClick={onClickRegister} disabled={requestInProgress}>
+
+                        <Button onClick={onTriggerDiscoverReaders} disabled={requestInProgress}>
               <Text size={14} color="dark">
-                Register reader
+                Discover readers
               </Text>
             </Button>
 
