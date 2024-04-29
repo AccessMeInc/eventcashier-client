@@ -7,9 +7,17 @@ import Group from "../components/Group/Group.jsx";
 import Icon from "../components/Icon/Icon.jsx";
 import Section from "../components/Section/Section.jsx";
 import Text from "../components/Text/Text.jsx";
+import TextInput from "../components/TextInput/TextInput.jsx";
 import TestPaymentMethods from "./TestPaymentMethods.jsx";
 
 class CommonWorkflows extends React.Component {
+
+    static CURRENCIES = [
+        { value: "eur", label: "EUR" },
+        { value: "usd", label: "USD" },
+        { value: "aud", label: "AUD" },
+    ];
+
   render() {
     const {
       onClickCancelPayment,
@@ -26,7 +34,23 @@ class CommonWorkflows extends React.Component {
         <Group direction="column" spacing={16}>
           <Text size={16} color="dark">
             Charge manually
-          </Text>
+                </Text>
+                <Group
+                    direction="row"
+                    alignment={{
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text size={12} color="dark">
+                        Charge amount
+                    </Text>
+                    <TextInput
+                        value={this.props.chargeAmount}
+                        onChange={this.props.onChangeChargeAmount}
+                        ariaLabel="Charge amount"
+                    />
+                </Group>
           <Group direction="column" spacing={8}>
             {usingSimulator && (
               <TestPaymentMethods
