@@ -109,7 +109,7 @@ class DiscoverReaders extends React.Component {
             <ReaderIcon />
 
             <Text color="darkGrey" size={12}>
-              Register a new reader, then discover readers on your account.
+                Discover readers on your account or register a new reader.
             </Text>
           </Group>
         </Section>

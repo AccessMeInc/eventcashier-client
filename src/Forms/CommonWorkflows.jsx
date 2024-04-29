@@ -43,12 +43,45 @@ class CommonWorkflows extends React.Component {
                     }}
                 >
                     <Text size={12} color="dark">
+                        Currency
+                    </Text>
+                    <Select
+                        items={CartForm.CURRENCIES}
+                        value={CartForm.CURRENCIES[0]}
+                        onChange={this.props.onChangeCurrency}
+                        ariaLabel="Currency"
+                    />
+                </Group>
+                <Group
+                    direction="row"
+                    alignment={{
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text size={12} color="dark">
                         Charge amount
                     </Text>
                     <TextInput
                         value={this.props.chargeAmount}
                         onChange={this.props.onChangeChargeAmount}
                         ariaLabel="Charge amount"
+                    />
+                </Group>
+                <Group
+                    direction="row"
+                    alignment={{
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text size={12} color="dark">
+                        Item description
+                    </Text>
+                    <TextInput
+                        value={this.props.itemDescription}
+                        onChange={this.props.onChangeItemDescription}
+                        ariaLabel="Item description"
                     />
                 </Group>
           <Group direction="column" spacing={8}>
