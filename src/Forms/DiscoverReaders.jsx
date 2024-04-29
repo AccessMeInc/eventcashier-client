@@ -154,7 +154,7 @@ class DiscoverReaders extends React.Component {
               <Button
                 color="text"
                                // onClick={this.onTriggerDiscoverReaders}
-                                onClick={this.onClickRegister}
+                                onClick={onClickRegister}
                 disabled={requestInProgress}
               >
                 Register reader
