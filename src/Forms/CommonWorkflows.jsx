@@ -1,62 +1,130 @@
-import React from 'react';
+//@flow
+
+import * as React from "react";
+
 import Button from "../components/Button/Button.jsx";
 import Group from "../components/Group/Group.jsx";
 import Icon from "../components/Icon/Icon.jsx";
 import Section from "../components/Section/Section.jsx";
 import Text from "../components/Text/Text.jsx";
 import TextInput from "../components/TextInput/TextInput.jsx";
-import Dropdown from "../components/Dropdown/Dropdown.jsx"; // Assume you have a Dropdown component
+import TestPaymentMethods from "./TestPaymentMethods.jsx";
 
 class CommonWorkflows extends React.Component {
-    state = {
-        currency: 'USD',
-        chargeAmount: '',
-        itemDescription: '',
-        emailAddress: ''
-    };
 
-    handleInputChange = (field, value) => {
-        this.setState({ [field]: value });
-    };
+    static CURRENCIES = [
+        { value: "eur", label: "EUR" },
+        { value: "usd", label: "USD" },
+        { value: "aud", label: "AUD" },
+    ];
 
-    handlePayment = async () => {
-        const { currency, chargeAmount, itemDescription, emailAddress } = this.state;
-        // Function to call your backend service with these values
-        await this.props.onSubmitPayment({ currency, chargeAmount, itemDescription, emailAddress });
-    };
-
-    render() {
-        return (
-            <Section>
-                <Group direction="column" spacing={16}>
-                    <Dropdown
-                        label="Currency"
-                        options={['USD', 'EUR', 'AUD']}
-                        value={this.state.currency}
-                        onChange={(value) => this.handleInputChange('currency', value)}
+  render() {
+    const {
+      onClickCancelPayment,
+      onChangeTestCardNumber,
+      onChangeTipAmount,
+      onChangeSimulateOnReaderTip,
+      onChangeTestPaymentMethod,
+      cancelablePayment,
+      workFlowDisabled,
+      usingSimulator,
+    } = this.props;
+    return (
+      <Section>
+        <Group direction="column" spacing={16}>
+          <Text size={16} color="dark">
+            Charge manually
+                </Text>
+                <Group
+                    direction="row"
+                    alignment={{
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text size={12} color="dark">
+                        Currency
+                    </Text>
+                    <Select
+                        items={CartForm.CURRENCIES}
+                        value={CartForm.CURRENCIES[0]}
+                        onChange={this.props.onChangeCurrency}
+                        ariaLabel="Currency"
                     />
-                    <TextInput
-                        label="Charge Amount"
-                        value={this.state.chargeAmount}
-                        onChange={(e) => this.handleInputChange('chargeAmount', e.target.value)}
-                    />
-                    <TextInput
-                        label="Item Description"
-                        value={this.state.itemDescription}
-                        onChange={(e) => this.handleInputChange('itemDescription', e.target.value)}
-                    />
-                    <TextInput
-                        label="Email Address (Optional)"
-                        value={this.state.emailAddress}
-                        onChange={(e) => this.handleInputChange('emailAddress', e.target.value)}
-                    />
-                    <Button onClick={this.handlePayment}>
-                        <Text>Collect Card Payment</Text>
-                    </Button>
                 </Group>
-            </Section>
-        );
-    }
+                <Group
+                    direction="row"
+                    alignment={{
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text size={12} color="dark">
+                        Charge amount
+                    </Text>
+                    <TextInput
+                        value={this.props.chargeAmount}
+                        onChange={this.props.onChangeChargeAmount}
+                        ariaLabel="Charge amount"
+                    />
+                </Group>
+                <Group
+                    direction="row"
+                    alignment={{
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text size={12} color="dark">
+                        Item description
+                    </Text>
+                    <TextInput
+                        value={this.props.itemDescription}
+                        onChange={this.props.onChangeItemDescription}
+                        ariaLabel="Item description"
+                    />
+                </Group>
+          <Group direction="column" spacing={8}>
+            {usingSimulator && (
+              <TestPaymentMethods
+                onChangeTestCardNumber={onChangeTestCardNumber}
+                onChangeTipAmount={onChangeTipAmount}
+                onChangeSimulateOnReaderTip={onChangeSimulateOnReaderTip}
+                onChangeTestPaymentMethod={onChangeTestPaymentMethod}
+              />
+            )}
+            <Button
+              color="white"
+              onClick={this.props.onClickCollectCardPayments}
+              disabled={workFlowDisabled}
+              justifyContent="left"
+            >
+              <Group direction="row">
+                <Icon icon="payments" />
+                <Text color="blue" size={14}>
+                  Collect card payment
+                </Text>
+              </Group>
+            </Button>
+
+            <Button
+              color="white"
+              onClick={onClickCancelPayment}
+              disabled={!cancelablePayment}
+              justifyContent="left"
+            >
+              <Group direction="row">
+                <Icon icon="cancel" />
+                <Text color="blue" size={14}>
+                  Cancel payment
+                </Text>
+              </Group>
+            </Button>
+          </Group>
+        </Group>
+      </Section>
+    );
+  }
 }
 
 export default CommonWorkflows;
